@@ -1,4 +1,7 @@
 {
+    "box/spout": {
+        "version": "v3.3.0"
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -227,6 +230,9 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/mime": {
+        "version": "v6.0.3"
+    },
     "symfony/options-resolver": {
         "version": "v6.0.3"
     },
@@ -234,6 +240,9 @@
         "version": "v1.24.0"
     },
     "symfony/polyfill-intl-icu": {
+        "version": "v1.24.0"
+    },
+    "symfony/polyfill-intl-idn": {
         "version": "v1.24.0"
     },
     "symfony/polyfill-intl-normalizer": {

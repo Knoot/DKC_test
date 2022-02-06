@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -39,5 +41,41 @@ class UserRepository extends ServiceEntityRepository
         asort($users);
 
         return $users;
+    }
+
+    public function createXlsx(string $rootDir): string
+    {
+        $users = $this->findAll();
+
+        $filePath = $rootDir . "/Users.xlsx";
+
+        $titleStyle = (new StyleBuilder())
+            ->setFontBold()
+            ->build();
+
+        $writer = WriterEntityFactory::createXLSXWriter();
+
+        $writer->openToFile($filePath);
+
+        $cells = [
+            WriterEntityFactory::createCell('id', $titleStyle),
+            WriterEntityFactory::createCell('Имя', $titleStyle),
+            WriterEntityFactory::createCell('Роль', $titleStyle),
+        ];
+
+        $writer->addRow(WriterEntityFactory::createRow($cells));
+
+        $rows = [];
+        foreach ($users as $user) {
+            $rows[] = WriterEntityFactory::createRowFromArray([
+                $user->getId(),
+                $user->getName(),
+                $user->getRole()->getTitle()
+            ]);
+        }
+        $writer->addRows($rows);
+        $writer->close();
+
+        return $filePath;
     }
 }

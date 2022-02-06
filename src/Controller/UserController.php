@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\RoleRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -97,6 +98,16 @@ class UserController extends AbstractController
         $this->repository->delete($user);
 
         return $this->redirect($this->generateUrl('user_list'));
+    }
+
+    #[Route('/user/download/users', name: 'download_xlsx', methods: ['GET'])]
+    public function downloadXlsx(): Response
+    {
+        $rootDir = $this->getParameter('kernel.project_dir') . '/public';
+
+        $path = $this->repository->createXlsx($rootDir);
+
+        return new BinaryFileResponse($path);
     }
 
     private function getRoleList(): array
