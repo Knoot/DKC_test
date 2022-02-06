@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Список пользователей</title>
+</head>
+
+<body>
+    <a href="{{ path('user_list') }}">Список пользователей</a>
+    <form action="{{ path('edit_user', {id: user.id}) }}" method="POST">
+        <input type='hidden' name='_method' value='PUT'>
+        <label>Имя пользователя</label>
+        <input name="name" type="text" value="{{ user.name }}"/>
+        <label>Роль</label>
+        <select name="role">
+            {% for role in roles %}
+                <option value="{{ role.id }}" {% if user.role_id is same as(role.id) %} selected='selected' {% endif %}>{{ role.title }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Изменить">
+    </form>
+    <form action="{{ path('user_delete', {id: user.id}) }}" method="POST">
+        <input type='hidden' name='_method' value='DELETE'>
+        <input type="submit" value="Удалить">
+    </form>
+</body>
+
+</html>

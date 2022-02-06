@@ -55,7 +55,8 @@ class User
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
-            'role_id' => $this->getRole()->getId()
+            'role_id' => $this->getRole()->getId(),
+            'role_name' => $this->getRole()->getTitle()
         ];
     }
 }

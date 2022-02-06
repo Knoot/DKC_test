@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Список пользователей</title>
+</head>
+
+<body>
+    <a href="{{ path('user_list') }}">Список пользователей</a>
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Имя</td>
+                <td>Роль</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.role_name }}</td>
+                <td>
+                    <a href="{{ path('edit_user_page', {id: user.id}) }}">Изменить</a>
+                </td>
+            </tr>
+        <tbody>
+    </table>
+</body>
+
+</html>

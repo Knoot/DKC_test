@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Создать пользователя</title>
+</head>
+
+<body>
+    <a href="{{ path('user_list') }}">Список пользователей</a>
+    <form action="{{ path('add_user') }}" method="POST">
+        <label>Имя пользователя</label>
+        <input name="name" type="text"/>
+        <label>Роль</label>
+        <select name="role">
+            {% for role in roles %}
+                <option value="{{ role.id }}">{{ role.title }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Создать">
+    </form>
+</body>
+
+</html>

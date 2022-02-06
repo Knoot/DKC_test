@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Список пользователей</title>
+</head>
+
+<body>
+    <a href="{{ path('add_user_page') }}">Создать пользователя</a>
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Имя</td>
+                <td>Роль</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.role_name }}</td>
+                    <td>
+                        <a href="{{ path('user_show', {id: user.id}) }}">Просмотр</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        <tbody>
+    </table>
+</body>
+
+</html>
